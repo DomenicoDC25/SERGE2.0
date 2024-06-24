@@ -11,12 +11,12 @@ The main goal of this project was to develop and validate a digital recreation o
 The platform is a conference room where it's possible to interact with other players, objects and play SERGE. It is based on a previous project named **The Metaverse Classroom** by **Viviana Pentangelo** - [vipenti](https://github.com/vipenti) at University of Salerno.
 
 <div align="center">
-  <img src="blobs/stripe1.JPG?raw=true" width="150" />
-  <img src="blobs/stripe3.png?raw=true" width="195" />
-  <img src="blobs/stripe2.JPG?raw=true" width="304" />
+  <img src="blobs/stripe1.JPG" width="150"/>
+  <img src="blobs/stripe3.png" width="195"/>
+  <img src="blobs/stripe2.JPG" width="304"/>
   <br>
-  <img src="blobs/stripe4.png?raw=true" width="202" />
-  <img src="blobs/stripe5.png?raw=true" width="202" />
+  <img src="blobs/stripe4.png" width="202"/>
+  <img src="blobs/stripe5.png" width="202"/>
 </div>
 
 

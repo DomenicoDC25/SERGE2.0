@@ -6,7 +6,7 @@
 </p>
 
 
-## Platform Description
+## Application Description
 The main goal of this project was to develop and validate a digital recreation of the serious game **SERGE**: a serious game specifically developed to support academics and students in learning risk management.
 The platform is a conference room where it's possible to interact with other players, objects and play SERGE. It is based on a previous project named **The Metaverse Classroom** by **Viviana Pentangelo** - [vipenti](https://github.com/vipenti) at University of Salerno.
 

@@ -54,9 +54,6 @@ This repository contains:
 3. Choose the path to the new directory.
 4. The project should now appear in your projects list. Click on its name and Unity will install all the needed libraries to make it work.
 
-## Author
-* **Nicola Modugno** - [nm](https://github.com/nicolamoothreemodugno)
-
 ## Shoutouts
 * **Pricey1600** for making the chairs - [Pricey1600](https://sketchfab.com/Pricey1600)
 * **MozillaHub** for making the table and the conference room- [mozillareality](https://sketchfab.com/mozillareality)

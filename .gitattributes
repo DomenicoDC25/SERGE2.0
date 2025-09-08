@@ -38,4 +38,3 @@ MacOS[[:space:]]Build.app/Contents/Resources/Data/sharedassets1.assets.resS filt
 Windows[[:space:]]Build/SERGE_Data/resources.assets.resS filter=lfs diff=lfs merge=lfs -text
 Windows[[:space:]]Build/SERGE_Data/sharedassets0.assets.resS filter=lfs diff=lfs merge=lfs -text
 Windows[[:space:]]Build/SERGE_Data/sharedassets1.assets.resS filter=lfs diff=lfs merge=lfs -text
-SERGE/SERGE/Server_python/Model/PJDScenarios/model.safetensors filter=lfs diff=lfs merge=lfs -text

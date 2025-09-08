@@ -11,7 +11,6 @@ using Photon.Pun.UtilityScripts;
 using Unity.VisualScripting;
 using Photon.Voice;
 
-
 public static class SerializableColor
 {
     public static byte[] Serialize(object obj)
@@ -35,9 +34,9 @@ public static class SerializableColor
         return color;
     }
 }
+
 public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
-
     public TMP_InputField nameInputField;
     public TMP_InputField passwordInputField;
     public GameObject initialGUI;
@@ -54,12 +53,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public GameObject modeform;
 
     public AudioSource buttonClick;
-
     public PhotonView player;
-    //public PhotonView Dice;
     public RoomOptions room;
 
-    public static event Action startGame, OnCreatedOrJoinedRoom, OnLeftTheRoom, hideUGSandTokensOnJoinedRoom; 
+    public static event Action startGame, OnCreatedOrJoinedRoom, OnLeftTheRoom, hideUGSandTokensOnJoinedRoom;
     public static event Action<int> OnCreatedOrJoinedRoomActorNumber;
 
     public const string GAME_MODE_PROPERTY_KEY = "g";
@@ -67,19 +64,22 @@ public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
     private bool didSwitchScene = false;
     [SerializeField] private GameObject solochairs, duochairs;
     public static List<int> PlayersInRoom = null;
+
     void Update()
     {
         if (didSwitchScene)
         {
             didSwitchScene = false;
-            //PhotonNetwork.ConnectUsingSettings();
             initialGUI.SetActive(true);
             modeform.SetActive(false);
             exitForm.SetActive(false);
         }
+
         if (PhotonNetwork.CurrentRoom != null)
         {
-            GameObject.FindGameObjectWithTag("MODE").GetComponent<TMP_Text>().text = (string)PhotonNetwork.CurrentRoom.CustomProperties["g"] + " MODE";
+            GameObject.FindGameObjectWithTag("MODE").GetComponent<TMP_Text>().text =
+                (string)PhotonNetwork.CurrentRoom.CustomProperties["g"] + " MODE";
+
             GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
             foreach (GameObject obj in playerObjects)
             {
@@ -91,57 +91,54 @@ public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
                 }
             }
         }
-        else if (PhotonNetwork.CurrentRoom == null)
+        else
         {
             GameObject.FindGameObjectWithTag("MODE").GetComponent<TMP_Text>().text = gameMode + " MODE";
         }
     }
+
     void Start()
     {
         modeform.SetActive(false);
         exitForm.SetActive(false);
-        //GameMechanics.OnGoingToLeave += Leave;
+
         PlayerController.OnGetUpNowQuit += Leave;
         EditorManager.OnSceneSwitched += setDidSwitchScene;
         PhotonNetwork.ConnectUsingSettings();
         loggedGUI.SetActive(false);
-        //clientButton.enabled = false;
-        //hostButton.enabled = false;
+
         hostButton.onClick.AddListener(() => {
             buttonClick.Play();
-            if (nameInputField.text == "")
+            if (string.IsNullOrEmpty(nameInputField.text))
             {
                 Logger.Instance.LogError("You must enter a name!");
                 nameInputField.placeholder.GetComponent<TMP_Text>().text = "You must enter a name!";
                 return;
             }
-            else if (passwordInputField.text == "")
+            else if (string.IsNullOrEmpty(passwordInputField.text))
             {
                 Logger.Instance.LogError("You must enter a password!");
                 passwordInputField.placeholder.GetComponent<TMP_Text>().text = "You must enter a password!";
                 return;
             }
-            else
-                modeform.SetActive(true);
+            modeform.SetActive(true);
         });
 
         clientButton.onClick.AddListener(() => {
             buttonClick.Play();
-
-            if (nameInputField.text == "")
+            if (string.IsNullOrEmpty(nameInputField.text))
             {
                 Logger.Instance.LogError("You must enter a name!");
                 nameInputField.placeholder.GetComponent<TMP_Text>().text = "You must enter a name!";
                 return;
             }
-            else if (passwordInputField.text == "")
+            else if (string.IsNullOrEmpty(passwordInputField.text))
             {
                 Logger.Instance.LogError("You must enter a password!");
                 passwordInputField.placeholder.GetComponent<TMP_Text>().text = "You must enter a password!";
                 return;
             }
-            else 
-                JoinRoom(passwordInputField.text);
+            JoinRoom(passwordInputField.text);
         });
 
         quitButton.onClick.AddListener(() => {
@@ -154,17 +151,15 @@ public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
             if (PhotonNetwork.CurrentRoom != null)
             {
                 exitForm.SetActive(true);
-            } 
+            }
             else
             {
                 Leave();
             }
-            //Leave();
         });
 
         editButton.onClick.AddListener(() => {
             buttonClick.Play();
-            //PhotonNetwork.Disconnect();
             initialGUI.SetActive(false);
             SceneManager.LoadScene(1, LoadSceneMode.Additive);
         });
@@ -185,33 +180,41 @@ public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
             CreateRoom(passwordInputField.text);
         });
     }
+
     private void setDidSwitchScene()
     {
         didSwitchScene = true;
     }
-    public override void OnMasterClientSwitched(Player newMasterClient)
-    {
-        //photonView.RPC("NotifyNewMaster", RpcTarget.All, newMasterClient.NickName);
-        //OnLeftTheRoom?.Invoke();
-    }    
+
+    public override void OnMasterClientSwitched(Player newMasterClient) { }
 
     public override void OnConnectedToMaster()
     {
         Logger.Instance.LogInfo("Connected to Master");
         hostButton.enabled = true;
         clientButton.enabled = true;
-        //PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedRoom()
     {
+        // Imposta il nickname del giocatore
         PhotonNetwork.NickName = nameInputField.text;
+
+        // Setta eventuali proprietà personalizzate
         SetCustomProperties();
+
+        // Eventi di notifica della stanza creata o joinata
         OnCreatedOrJoinedRoom?.Invoke();
         OnCreatedOrJoinedRoomActorNumber?.Invoke(PhotonNetwork.LocalPlayer.ActorNumber);
+
+        // Aggiorna la GUI
         initialGUI.SetActive(false);
         loggedGUI.SetActive(true);
+
+        // Istanzia il player nella scena
         GameObject myPlayer = PhotonNetwork.Instantiate(player.name, Vector3.zero, Quaternion.identity);
+
+        // Imposta la camera per seguire il player
         Transform playerCam = GameObject.FindWithTag("MainCamera").transform;
         if (playerCam != null)
         {
@@ -221,10 +224,32 @@ public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
                 followScript.target = myPlayer;
             }
         }
+
+        // 🔹 Mostra lo scenario solo ora
+        GameObject scenarioManager = GameObject.Find("ScenarioManager");
+        if (scenarioManager != null)
+        {
+            LLMScenario llmScenario = scenarioManager.GetComponent<LLMScenario>();
+            if (llmScenario != null)
+            {
+                llmScenario.ShowScenario(); // ✅ qui chiamiamo ShowScenario
+            }
+            else
+            {
+                Debug.LogError("LLMScenario non trovato su ScenarioManager!");
+            }
+        }
+        else
+        {
+            Debug.LogError("ScenarioManager non trovato nella scena!");
+        }
     }
+
+
     private void CreateRoom(string name)
     {
-        RoomOptions roomOptions = new RoomOptions {
+        RoomOptions roomOptions = new RoomOptions
+        {
             BroadcastPropsChangeToAll = true,
             EmptyRoomTtl = 0,
             CleanupCacheOnLeave = true,
@@ -233,41 +258,30 @@ public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
             IsOpen = true
         };
         roomOptions.CustomRoomProperties = new Hashtable() { { "g", gameMode } };
-        PhotonNetwork.CreateRoom(name,roomOptions);
+        PhotonNetwork.CreateRoom(name, roomOptions);
         LogManager.Instance.LogInfo($"{nameInputField.text} created room {name}");
         OnCreatedOrJoinedRoom?.Invoke();
         OnCreatedOrJoinedRoomActorNumber?.Invoke(PhotonNetwork.LocalPlayer.ActorNumber);
-        //Presenter.Instance.presenterID = PhotonNetwork.LocalPlayer.UserId;
     }
+
     private void JoinRoom(string roomName)
     {
         PhotonNetwork.JoinRoom(roomName);
-
-        //hideUGSandTokensOnJoinedRoom?.Invoke(); 
-        //OnCreatedOrJoinedRoom?.Invoke();
-        //OnCreatedOrJoinedRoomActorNumber?.Invoke(PhotonNetwork.LocalPlayer.ActorNumber);
-
         LogManager.Instance.LogInfo($"You are actor number " + PhotonNetwork.LocalPlayer.ActorNumber);
     }
 
-
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        Debug.Log("Sono qui aoo");
         PlayersInRoom = null;
-        Logger.Instance.LogInfo($"<color=yellow>{otherPlayer.NickName}</color> ha lasciato la stanza.");
+        Logger.Instance.LogInfo($"{otherPlayer.NickName} ha lasciato la stanza.");
         LogManager.Instance.LogInfo($"{otherPlayer.NickName} ha lasciato la stanza.");
     }
+
     private void Leave()
     {
-        if (PhotonNetwork.CurrentRoom != null)
-        {
-            PhotonNetwork.LeaveRoom(false);
-        }
-        else
-        {
-            PhotonNetwork.Disconnect();
-        }
+        if (PhotonNetwork.CurrentRoom != null) PhotonNetwork.LeaveRoom(false);
+        else PhotonNetwork.Disconnect();
+
         loggedGUI.SetActive(false);
         initialGUI.SetActive(true);
         modeform.SetActive(false);
@@ -275,39 +289,27 @@ public class ConnectToServer : MonoBehaviourPunCallbacks, ILobbyCallbacks
         passwordInputField.placeholder.GetComponent<TMP_Text>().text = "Enter password...";
         Cursor.lockState = CursorLockMode.None;
     }
+
     private void SetCustomProperties()
     {
         PhotonPeer.RegisterType(typeof(Color32), (byte)'C', SerializableColor.Serialize, SerializableColor.Deserialize);
     }
-    [PunRPC]
-    public void NotifyRpc(string msg)
-    {
-        Logger.Instance.LogInfo(msg);
-    }
-    [PunRPC]
-    public void NotifyNewMaster(string name)
-    {
-        Logger.Instance.LogInfo("Old room owner disconnected. New owner is now <color=yellow>" + name + "</color>.");
-    }
+
+    [PunRPC] public void NotifyRpc(string msg) { Logger.Instance.LogInfo(msg); }
+    [PunRPC] public void NotifyNewMaster(string name) { Logger.Instance.LogInfo("Old room owner disconnected. New owner is now <color=yellow>" + name + "</color>."); }
+
     public override void OnDisconnected(DisconnectCause cause)
     {
         OnLeftTheRoom?.Invoke();
         PlayersInRoom = null;
         Debug.LogError("Disconnesso: " + cause.ToString());
     }
-    
-    public void LeaveTheRoom() 
+
+    public void LeaveTheRoom()
     {
         OnLeftTheRoom?.Invoke();
-        //Leave();
-        if (exitForm.activeSelf)
-        {
-            exitForm.SetActive(false);
-        }
+        if (exitForm.activeSelf) exitForm.SetActive(false);
     }
 
-    public void cancelButton()
-    {
-        exitForm.SetActive(false);
-    }
+    public void cancelButton() { exitForm.SetActive(false); }
 }

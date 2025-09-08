@@ -3,7 +3,16 @@ guid: b32e3f00a5ce67e43b4f6493b465710a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerRoot: {instanceID: 0}
+  - controller: {instanceID: 0}
+  - feet: {instanceID: 0}
+  - volumeIcon: {instanceID: 0}
+  - playerName: {instanceID: 0}
+  - overhead: {instanceID: 0}
+  - animatorController: {instanceID: 0}
+  - clapSound: {instanceID: 0}
+  - FeedbackScenario: {fileID: 5246048919815874786, guid: cd224fb818d717140a0d676605dc1961, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

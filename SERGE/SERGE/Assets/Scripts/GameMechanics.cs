@@ -117,8 +117,17 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
     private Player lastPlayerToThrowDice = null;
     private Player lastMasterClient = null;
     private bool HasnumberOfActorsThatFinishedReadingIcreased = false;
-    private bool isFirstTurnInRiskManagement = true; //determina se è il primo turno durante la fase di Risk Management
+    private bool isFirstTurnInRiskManagement = true; //determina se ï¿½ il primo turno durante la fase di Risk Management
     private bool isRankingCleared = true;
+
+    public static bool scenarioGenerated = false;
+
+    public static bool IsScenarioReady()
+    {
+        return scenarioGenerated; //settata a true da LLMScenario.cs
+    }
+
+
     private void setUpGame()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -329,7 +338,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         else if (gameState.Equals(GameState.CardReading) && isGameStarted && !finishedReading)
         {
             GameObject.Find("Fase (testo)").GetComponent<TMP_Text>().text = "Card Reading";
-            GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "Cosa c'è scritto sulla carta?";
+            GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "Cosa c'ï¿½ scritto sulla carta?";
         }
         else if (gameState.Equals(GameState.CardReading) && isGameStarted && finishedReading)
         {
@@ -400,7 +409,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             }
             else if (TurnRiskManagementTimer >= 4f)
             {
-                GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "È il tuo turno";
+                GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "ï¿½ il tuo turno";
                 TurnRiskManagementTimer = 0f;
             }
         }
@@ -452,17 +461,17 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
                 else
                 {
                     secondDiceThrown = false;
-                    Debug.LogError("È la fase di Risk Management");
+                    Debug.LogError("ï¿½ la fase di Risk Management");
                     Debug.LogError("ma ora passo alla fase CardReading");
                     gameState = GameState.CardReading;
                     finishedReading = false;
                     enteredCardReading = true;
                     if (actual_move[2] == 0) // carta evento
                     {
-                        //g.text = "è una carta evento";
+                        //g.text = "ï¿½ una carta evento";
                         //this.photonView.RPC("spawnCard", RpcTarget.All, true, actual_move[1]);
                         //evento spawn card
-                        Debug.LogError("È una carta evento");
+                        Debug.LogError("ï¿½ una carta evento");
                         if (PhotonNetwork.LocalPlayer.ActorNumber == player.ActorNumber)
                         {
                             byte evCode = throwTheDice;
@@ -488,10 +497,10 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
                         {
                             hasPlayersTurnCompletitionIncreased = true;
                             playersTurnCompletition++;
-                            Debug.LogError("Oh No! È una carta rischio");
+                            Debug.LogError("Oh No! ï¿½ una carta rischio");
                         }
                         eventsCount = 0;
-                        Debug.LogError("È una carta rischio");
+                        Debug.LogError("ï¿½ una carta rischio");
                         if (TeamSelection.myTeamIndex == actual_move[3])
                         {
                             assignPoints(diceToPile(actual_move[0]), actual_move[1]);
@@ -653,8 +662,8 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             if (lastplayer == null)
             {
                 Debug.LogError("Giocatore non trovato, passo al successivo");
-                isLocalPlayerTurn = false; //blocca la possibilità di lanciare il dado
-                areCardsSelectable = false; //blocca la possibilità di scegliere le carte a prescindere da quelle scelte dal compagno
+                isLocalPlayerTurn = false; //blocca la possibilitï¿½ di lanciare il dado
+                areCardsSelectable = false; //blocca la possibilitï¿½ di scegliere le carte a prescindere da quelle scelte dal compagno
                 if (gameState.Equals(GameState.PlanningPoker))
                 {
                     this.turnManager.SendMove(true, true);
@@ -750,9 +759,9 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
                 riskDeck.RemoveAt(card_index);
                 resetEveryCard(); //ripristina le carte impatto e rischio che sono state disabilitate nell'ultima "ri-votazione"
                 areCardsSelectable = false;
-                if (objectingVotes == 2) //Si è già stati nello stato di planning poker nel turno precedente
+                if (objectingVotes == 2) //Si ï¿½ giï¿½ stati nello stato di planning poker nel turno precedente
                 {
-                    Debug.LogError("Si è già stati nello stato di planning poker, passo a RiskAnalysis");
+                    Debug.LogError("Si ï¿½ giï¿½ stati nello stato di planning poker, passo a RiskAnalysis");
                     gameState = GameState.RiskAnalysis;
                     objectingVotes = 0;
                     if (PhotonNetwork.IsMasterClient && riskDeck.Count != 0) chooseIndex(UnityEngine.Random.Range(0, riskDeck.Count));
@@ -952,17 +961,17 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             {
                 hasVoted = false;
             }
-            GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "È il tuo turno";
+            GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "ï¿½ il tuo turno";
         }
     }
     void BeginMyTurn()
     {
         Debug.LogError("turn started");
-        if (!ActorNumbers.Contains(PhotonNetwork.LocalPlayer.ActorNumber) || TeamSelection.isTeamMate) //Se è un compagno di squadra 
+        if (!ActorNumbers.Contains(PhotonNetwork.LocalPlayer.ActorNumber) || TeamSelection.isTeamMate) //Se ï¿½ un compagno di squadra 
         {
-            Debug.LogError("Il giocatore di turno non è presente tra gli ActorNumbers");
-            isLocalPlayerTurn = false; //blocca la possibilità di lanciare il dado
-            areCardsSelectable = false; //blocca la possibilità di scegliere le carte a prescindere da quelle scelte dal compagno
+            Debug.LogError("Il giocatore di turno non ï¿½ presente tra gli ActorNumbers");
+            isLocalPlayerTurn = false; //blocca la possibilitï¿½ di lanciare il dado
+            areCardsSelectable = false; //blocca la possibilitï¿½ di scegliere le carte a prescindere da quelle scelte dal compagno
             if (gameState.Equals(GameState.PlanningPoker))
             {
                 this.turnManager.SendMove(true, true);
@@ -1021,8 +1030,8 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         }
         if (gameState.Equals(GameState.Premiation))
         {
-            isLocalPlayerTurn = false; //blocca la possibilità di lanciare il dado
-            areCardsSelectable = false; //blocca la possibilità di scegliere le carte a prescindere da quelle scelte dal compagno
+            isLocalPlayerTurn = false; //blocca la possibilitï¿½ di lanciare il dado
+            areCardsSelectable = false; //blocca la possibilitï¿½ di scegliere le carte a prescindere da quelle scelte dal compagno
         }
     }
 
@@ -1048,7 +1057,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         if (phase.Equals(GameState.CardReading))
         {
             Debug.LogError("Waiting then I'll start the turn");
-            GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "Cosa c'è scritto sulla carta?";
+            GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "Cosa c'ï¿½ scritto sulla carta?";
             yield return new WaitForSeconds(0);
             if (PhotonNetwork.IsMasterClient)
             {
@@ -1090,7 +1099,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         pairOfCards.transform.localScale = new Vector3(2f, 2f, 2f);
         //mostro l'impatto
         pairOfCards.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().materials[1].mainTexture = Resources.Load<Texture>("Images/Impact/" + lastVote[1].ToString());
-        //mostro la probabilità
+        //mostro la probabilitï¿½
         pairOfCards.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().materials[1].mainTexture = Resources.Load<Texture>("Images/Percentage/" + lastVote[0].ToString());
     }
     void populateEventDeck()
@@ -1134,7 +1143,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         if (IsEventCard)
         {
             hasPlayersTurnCompletitionIncreased = false;
-            //Il nome delle carte nella lista è lo stesso dei prefab!
+            //Il nome delle carte nella lista ï¿½ lo stesso dei prefab!
             Quaternion rotation = new Quaternion(0, PlayerController.playerCam.rotation.y, 0, 0);
             Debug.LogError("Spawning "+ eventCards[index].Name + " ... ");
             actualEventCard = Instantiate(Resources.Load<GameObject>(eventCards[index].Name), new Vector3(0.148000002f,1.201f,-6.89499998f) /*new Vector3(0.163000003f, -0.465999991f, -6.70599985f)*/, rotation);
@@ -1198,7 +1207,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             actualCard = GameObject.Instantiate(Resources.Load<GameObject>(Board[pile][index % Board[pile].Count].id), new Vector3(0.148000002f,1.201f,-6.89499998f) /*new Vector3(0.163000003f, -0.465999991f, -6.70599985f)*/, rotation);
             //Mostra il prevention plan
             actualCard.transform.GetChild(1).gameObject.SetActive(false);
-            //Mostra la probabilità sulla carta
+            //Mostra la probabilitï¿½ sulla carta
             actualCard.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TMP_Text>().text = Board[pile][index].probability.ToString() + "%";
             //Mostra l'impatto sulla carta
             switch (Board[pile][index % Board[pile].Count].impact)
@@ -1667,8 +1676,8 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             return 6;
         }
     }
-    //move[2] = 0 allora è una carta evento altrimenti
-    //move[2] = 1 se è una carta rischio.
+    //move[2] = 0 allora ï¿½ una carta evento altrimenti
+    //move[2] = 1 se ï¿½ una carta rischio.
     //move[1] = indice da cui pescare la carta.
     //move[0] = risultato del lancio.
     //move[3] = team index.
@@ -1690,14 +1699,14 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             Debug.LogError("event card condition reached, choosing index");
             int index = UnityEngine.Random.Range(0, eventCards.Count);
             move[1] = index;
-            move[2] = 0; //è una carta evento
+            move[2] = 0; //ï¿½ una carta evento
             Debug.LogError("This is throwFirstDice event cards are " + eventCards.Count);
             turnManager.SendMove(move, false);
         }
         else
         {
             Debug.LogError("second throw condition reached");
-            move[2] = 1; //è una carta rischio
+            move[2] = 1; //ï¿½ una carta rischio
             turnManager.SendMove(move, false); //secondo lancio (scelgo la pila)
         }
     }
@@ -1814,7 +1823,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             case 0:
                 foreach (int a in r.prevention_plan_low)//Per ogni risorsa richiesta, con livello di prevesione Low ...
                 {
-                    if (UserGameSheet.resources[a] >= 0)//Per la risorsa richiesta è stato speso un token verde o uno con valore maggiore
+                    if (UserGameSheet.resources[a] >= 0)//Per la risorsa richiesta ï¿½ stato speso un token verde o uno con valore maggiore
                     {
                         points = 3;
                     }
@@ -1823,7 +1832,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             case 1:
                 foreach (int a in r.prevention_plan_middle)//Per ogni risorsa richiesta, con livello di prevesione Middle ...
                 {
-                    if (UserGameSheet.resources[a] >= 1) //Per la risorsa richiesta è stato speso un token giallo o uno con valore maggiore
+                    if (UserGameSheet.resources[a] >= 1) //Per la risorsa richiesta ï¿½ stato speso un token giallo o uno con valore maggiore
                     {
                         points = 3;
                     }
@@ -1841,7 +1850,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             case 2:
                 foreach (int a in r.prevention_plan_high)//Per ogni risorsa richiesta, con livello di prevesione High ...
                 {
-                    if (UserGameSheet.resources[a] >= 2)//Per la risorsa richiesta è stato speso un token rosso
+                    if (UserGameSheet.resources[a] >= 2)//Per la risorsa richiesta ï¿½ stato speso un token rosso
                     {
                         points = 3;
                     }
@@ -1955,7 +1964,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             Debug.LogError("received printPlayerTurnEvent "+nickname);
             if (fase.activeSelf)
             {
-                GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "È il turno di " + nickname;
+                GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "ï¿½ il turno di " + nickname;
                 areCardsSelectable = false;
             }
         }
@@ -1969,7 +1978,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         {
             card_index = (int)(photonEvent.CustomData);
             Debug.LogError("Second dice thrown. Got " + card_index);
-            //GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "Cosa c'è scritto sulla carta?";
+            //GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "Cosa c'ï¿½ scritto sulla carta?";
             if (isRiskCardInstantiated == false)
             {
                 isRiskCardInstantiated = true;
@@ -1989,7 +1998,7 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         }
         else if (code == spawnCardEvent)
         {
-            //GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "Cosa c'è scritto sulla carta?";
+            //GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text = "Cosa c'ï¿½ scritto sulla carta?";
             int index = (int)photonEvent.CustomData;
             Debug.LogError("SpawnCardEvent index: " + index);
             spawnCard(true, index);
@@ -2081,8 +2090,8 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
                 }
             }*/
             //OnGameFinished?.Invoke(); //resets the chairState
-            Logger.Instance.LogInfo($"<color=yellow>{nickname}</color> si è disconnesso dalla partita");
-            LogManager.Instance.LogInfo($"{nickname} si è disconnesso dalla partita");
+            Logger.Instance.LogInfo($"<color=yellow>{nickname}</color> si ï¿½ disconnesso dalla partita");
+            LogManager.Instance.LogInfo($"{nickname} si ï¿½ disconnesso dalla partita");
         }
     }
     void isPossibleToLeave()
@@ -2109,9 +2118,9 @@ public class GameMechanics : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
             content[2] = TeamSelection.myTeamIndex;
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
             PhotonNetwork.RaiseEvent(evCode, content, raiseEventOptions, SendOptions.SendReliable);
-            isLocalPlayerTurn = false; //blocca la possibilità di lanciare il dado
-            areCardsSelectable = false; //blocca la possibilità di scegliere le carte a prescindere da quelle scelte dal compagno
-            if (fase.activeSelf && (GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text.Equals("È il tuo turno") || 
+            isLocalPlayerTurn = false; //blocca la possibilitï¿½ di lanciare il dado
+            areCardsSelectable = false; //blocca la possibilitï¿½ di scegliere le carte a prescindere da quelle scelte dal compagno
+            if (fase.activeSelf && (GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text.Equals("ï¿½ il tuo turno") || 
             GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text.Equals("Premi la freccia destra per lanciare il dado") ||
             GameObject.Find("Fase (sottotesto)").GetComponent<TMP_Text>().text.Contains("Hai")) && PhotonNetwork.CurrentRoom.PlayerCount > 1)
             {

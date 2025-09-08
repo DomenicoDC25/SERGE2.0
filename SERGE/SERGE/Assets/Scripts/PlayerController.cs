@@ -9,6 +9,9 @@ using Photon.Pun.UtilityScripts;
 using ExitGames.Client.Photon;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
+using UnityEngine.UI;      // se usi il vecchio UI Text
+using System.Collections;  // serve per IEnumerator e coroutines
+
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
@@ -167,7 +170,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private void Update()
     {
         if (!photonView.IsMine) { return; }
+
         controller.Move(velocity * Time.deltaTime);
+
         // Camera Movement
         Vector2 mouseInput = new Vector2(mouseX.ReadValue<float>() * cameraSensitivity, mouseY.ReadValue<float>() * cameraSensitivity);
         rotX -= mouseInput.y;
@@ -175,50 +180,47 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if(!isSitting)
             rotY += mouseInput.x;
-
-        else if(isSitting & !isTyping)
-        {
+        else if(isSitting && !isTyping)
             rotY += mouseInput.x;
-            //rotY = Mathf.Clamp(rotY, -180, +180);
-        }
-
-        else if(isSitting & isTyping)
-        {
+        else if(isSitting && isTyping)
             rotY += mouseInput.x;
-            //rotY = Mathf.Clamp(rotY, -10, +10);
-        }
 
         playerRoot.rotation = Quaternion.Euler(0f, rotY, 0f);
-        //playerCam.localRotation = Quaternion.Euler(rotX, 0f, 0f);
         playerCam.rotation = Quaternion.Euler(rotX, 0f, 0f);
 
         // Player Movement
         Vector2 moveInput = move.ReadValue<Vector2>();
         Vector3 moveVelocity = playerRoot.forward * moveInput.y + playerRoot.right * moveInput.x;        
-        
         controller.Move(moveVelocity * speed * Time.deltaTime);
 
         isGrounded = Physics.Raycast(feet.position, feet.TransformDirection(Vector3.down), 0.50f);
 
         if (isGrounded)
-        {
             velocity = new Vector3(0f, -3f, 0f);
-        }
         else
-        {
             velocity -= gravity * Time.deltaTime * Vector3.up;
-        }
 
         // Player sitting 
-        if (Input.GetKeyUp(KeyCode.C) && chair != null && !chair.GetComponent<ChairController>().IsBusy() && !isSitting && !isMoving && !isBackwardMoving && !textChat.isSelected)
-        {            
-            Seat();
-            //OnSeat?.Invoke(chairToTeam(chair.name));
-        }
-        else if (Input.GetKeyUp(KeyCode.C) && isSitting && !Input.GetKey(KeyCode.W) && 
-            !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !textChat.isSelected && !isTyping && !GameMechanics.isGameStarted)
+        if (Input.GetKeyUp(KeyCode.C))
         {
-            GetUp();
+            if (!GameMechanics.scenarioGenerated)
+            {
+                Debug.Log("Non puoi sederti: scenario non generato.");
+            }
+            else
+            {
+                if (chair != null && !chair.GetComponent<ChairController>().IsBusy() && !isSitting && !isMoving && !isBackwardMoving && !textChat.isSelected)
+                {            
+                    Seat();
+                    //OnSeat?.Invoke(chairToTeam(chair.name));
+                }
+                else if (isSitting && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) &&
+                        !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D) && !textChat.isSelected &&
+                        !isTyping && !GameMechanics.isGameStarted)
+                {
+                    GetUp();
+                }
+            }
         }
 
         // Player writing on whiteboard
@@ -226,9 +228,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             EditWhiteboard();
         }
-
         else if (Input.GetKeyUp(KeyCode.Escape) && whiteBoard != null && whiteBoard.isBeingEdited && 
-            Presenter.Instance.writerID == PhotonNetwork.LocalPlayer.UserId && !textChat.isSelected)
+                Presenter.Instance.writerID == PhotonNetwork.LocalPlayer.UserId && !textChat.isSelected)
         {
             StopEditWhiteboard();
         }
@@ -243,7 +244,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             handRaiseCooldown = 10;
         }
 
-        if (textChat.isSelected || isTyping)
+        if (textChat.isSelected)
         {
             controller.enabled = false;
         }
@@ -251,7 +252,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             controller.enabled = true;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) /*&& !PlayerController.isShaking*/ && GameMechanics.isLocalPlayerTurn && !TeamSelection.isTeamMate && !InfoCardsController.isVisible)
+
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && GameMechanics.isLocalPlayerTurn && !TeamSelection.isTeamMate && !InfoCardsController.isVisible)
         {
             GameMechanics.isLocalPlayerTurn = false;
             float result = UnityEngine.Random.Range(0f,1f);
@@ -272,22 +274,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
             GameMechanics.isMyTurnToTalk = false;
             stopTalking?.Invoke();
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) && GameMechanics.gameState.Equals(GameState.CardReading) /*&& !TeamSelection.isTeamMate*/ && !GameMechanics.finishedReading)
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && GameMechanics.gameState.Equals(GameState.CardReading) && !GameMechanics.finishedReading)
         {
             Debug.LogError("Player Controller: Finished Reading");
             GameMechanics.finishedReading = true;
             finishReading?.Invoke();
         }
-        /*
-        else if (Input.GetKeyDown(KeyCode.LeftControl) && GameMechanics.gameState == GameState.RiskManagement && !TokenUI.isVisible)
-        {
-            showTokens?.Invoke();
 
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftControl) && GameMechanics.gameState == GameState.RiskManagement && TokenUI.isVisible)
-        {
-            hideTokens?.Invoke();
-        }*/
         if (UserGameSheet.isVisible)
         {
             move.Disable();
@@ -300,9 +293,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
             mouseX.Enable();
             mouseY.Enable();
         }
+
         AnimatorChecker(moveVelocity);
         InteractionInfoUpdate();
     }
+
 
     private void LateUpdate()
     {

@@ -50,8 +50,6 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
 
 ## Come Installare
 
----
-
 ### Solo Applicazione
 
 ---

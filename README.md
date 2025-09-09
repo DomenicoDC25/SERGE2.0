@@ -116,6 +116,8 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
 
    5. Avviare il server seguendo le istruzioni specifiche per Windows o MacOS (vedi sopra).
 
+---
+
 ### Ringraziamenti
    - **Raffaele Del Sorbo**, **Niccolò Pio Tancredi** e **Vincenzo Sangiovanni** per il testing delle applicazioni.
    - Tutti i membri delle comunità open-source di **Unity3D**, **Photon Unity Networking** e delle **librerie Python per IA**, il cui lavoro ha reso possibile          questo progetto.

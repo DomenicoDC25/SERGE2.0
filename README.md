@@ -93,6 +93,8 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
    sed -i '' 's/\r$//' ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/avvia_server.sh
    ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/avvia_server.sh
 
+---
+
 #### Progetto Unity
 **Requisiti**
    1. Unity3D versione: 2021.3.22f1

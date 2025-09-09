@@ -86,7 +86,7 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
    ~/tuo_percorso/MacOS Build.app/Contents/MacOS/installazione_python_server.sh
 
 4. **Avvio server (solo host)**
-   Apri il terminale ed esegui:
+   <br>Apri il terminale ed esegui:
    ```bash
    chmod +x ~/tuo_percorso/MacOS Build.app/Contents/MacOS/avvia_server.sh
    sed -i '' 's/\r$//' ~/tuo_percorso/MacOS Build.app/Contents/MacOS/avvia_server.sh

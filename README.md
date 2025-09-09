@@ -25,13 +25,13 @@ Il progetto si basa su precedenti lavori:
 **SERGE 2.0** integra un modello di intelligenza artificiale che genera automaticamente scenari di progetto, offrendo esperienze di gioco dinamiche, personalizzate e maggiormente immersive.
 
 <div align="center">
-  <img src="blobs/stripe1.JPG" width="150"/>
-  <img src="blobs/serge1.png" height="200"/>
-  <img src="blobs/serge2.png" height="200"/>
+  <img src="blobs/stripe1.JPG" height="150"/>
+  <img src="blobs/serge1.png" height="150"/>
+  <img src="blobs/serge2.png" height="150"/>
   <br>
-  <img src="blobs/stripe3.png" height="200"/>
-  <img src="blobs/serge3.png" height="200"/>
-  <img src="blobs/stripe2.JPG" height="200"/>
+  <img src="blobs/stripe3.png" height="150"/>
+  <img src="blobs/serge3.png" height="150"/>
+  <img src="blobs/stripe2.JPG" height="150"/>
 </div>
 
 ---

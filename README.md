@@ -26,7 +26,7 @@ Il progetto si basa su precedenti lavori:
 
 <div align="center">
   <img src="blobs/stripe1.JPG" width="150"/>
-  <img src="blobs/serge1.png" height="300"/>
+  <img src="blobs/serge1.png" height="200"/>
   <img src="blobs/serge2.png" width="304"/>
   <br>
   <img src="blobs/stripe3.png" width="202"/>

@@ -1,4 +1,4 @@
-<h1 align="center">SERGE 2.0 & IA: Integrazione di un modello IA in SERGE 2.0</h1>
+<h1 align="left">SERGE 2.0 & IA: Integrazione di un modello IA in SERGE 2.0</h1>
 
 <h3 align="left"></h3>
 <p align="left">

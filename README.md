@@ -77,3 +77,42 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
    ```bash
    chmod +x ~/tuo_percorso/MacOS\ Build.app/Contents/MacOS/SERGE
    ~/tuo_percorso/MacOS\ Build.app/Contents/MacOS/SERGE
+
+3. **Installazione Python e librerie (solo host)**  
+   Apri il terminale ed esegui:  
+   ```bash
+   chmod +x ~/tuo_percorso/MacOS\ Build.app/Contents/MacOS/installazione_python_server.sh
+   sed -i '' 's/\r$//' ~/tuo_percorso/MacOS\ Build.app/Contents/MacOS/installazione_python_server.sh
+   ~/tuo_percorso/MacOS\ Build.app/Contents/MacOS/installazione_python_server.sh
+
+4. **Avvio server (solo host)**
+   ```bash
+   Apri il terminale ed esegui:
+   chmod +x ~/tuo_percorso/MacOS\ Build.app/Contents/MacOS/avvia_server.sh
+   sed -i '' 's/\r$//' ~/tuo_percorso/MacOS\ Build.app/Contents/MacOS/avvia_server.sh
+   ~/tuo_percorso/MacOS\ Build.app/Contents/MacOS/avvia_server.sh
+
+#### Progetto Unity
+**Requisiti**
+   1. Unity3D versione: 2021.3.22f1
+   2. Unity Hub
+
+**Passaggi**
+   1. Scaricare la cartella SERGE dal repository.
+
+   2. Scaricare il modello PJDScenarios dalla release corrispondente.
+
+   3. Inserire il modello:
+      3.1 All’interno della cartella Server_python in SERGE, creare una cartella Model.
+      3.2 Inserire PJDScenarios come sottocartella di Model contenente tutti i file richiesti:
+          config.json, generation_config.json, merges.txt, model.safetensors, special_tokens_map.json, tokenizer.json, tokenizer_config.json, vocab.json
+
+   4. Aprire il progetto in Unity Hub
+      4.1 Vai su Projects → Open e seleziona la cartella SERGE.
+      4.2 Unity installerà automaticamente tutte le librerie necessarie.
+
+   5. Avviare il server seguendo le istruzioni specifiche per Windows o MacOS (vedi sopra).
+
+### Ringraziamenti
+   - **Raffaele Del Sorbo**, **Niccolò Pio Tancredi** e **Vincenzo Sangiovanni** per il testing delle applicazioni.
+   - Tutti i membri delle comunità open-source di **Unity3D**, **Photon Unity Networking** e delle **librerie Python per IA**, il cui lavoro ha reso possibile          questo progetto.

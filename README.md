@@ -103,13 +103,13 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
    2. Scaricare il modello PJDScenarios dalla release corrispondente.
 
    3. Inserire il modello:
-      3.1 All’interno della cartella Server_python in SERGE, creare una cartella Model.
-      3.2 Inserire PJDScenarios come sottocartella di Model contenente tutti i file richiesti:
+      <br>3.1 All’interno della cartella Server_python in SERGE, creare una cartella Model.
+      <br>3.2 Inserire PJDScenarios come sottocartella di Model contenente tutti i file richiesti:
           config.json, generation_config.json, merges.txt, model.safetensors, special_tokens_map.json, tokenizer.json, tokenizer_config.json, vocab.json
 
    4. Aprire il progetto in Unity Hub
-      4.1 Vai su Projects → Open e seleziona la cartella SERGE.
-      4.2 Unity installerà automaticamente tutte le librerie necessarie.
+      <br>4.1 Vai su Projects → Open e seleziona la cartella SERGE.
+      <br>4.2 Unity installerà automaticamente tutte le librerie necessarie.
 
    5. Avviare il server seguendo le istruzioni specifiche per Windows o MacOS (vedi sopra).
 

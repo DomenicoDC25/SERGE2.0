@@ -53,10 +53,10 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
 
 #### Windows
 1. **Scaricare l’applicazione**  
-   Scarica la cartella **Windows Build** dalla sezione Releases e estraila in una posizione a tua scelta.  
+   Scarica la cartella **APP_Windows.zip** dalla sezione Releases e estraila in una posizione a tua scelta.  
 
 2. **Avvio del gioco**  
-   Apri la cartella **Windows Build** e fai doppio clic su `SERGE.exe`.
+   Apri la cartella **APP_Windows** e fai doppio clic su `SERGE.exe`.
 
 3. **Avvio del server locale (solo host)**  
    a. Installazione Python, librerie e ambiente virtuale:  
@@ -70,7 +70,7 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
 
 #### MacOS
 1. **Scaricare l’applicazione**  
-   Scarica la cartella **MacOS.app** dalla sezione Releases ed estraila in una posizione a tua scelta.  
+   Scarica la cartella **MacOS.app.zip** dalla sezione Releases ed estraila in una posizione a tua scelta.  
 
 2. **Avvio del gioco**  
    Apri il terminale ed esegui:  

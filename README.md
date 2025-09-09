@@ -29,9 +29,9 @@ Il progetto si basa su precedenti lavori:
   <img src="blobs/serge1.png" height="200"/>
   <img src="blobs/serge2.png" height="200"/>
   <br>
-  <img src="blobs/stripe3.png" width="202"/>
-  <img src="blobs/serge2.png" width="202"/>
-  <img src="blobs/stripe2.JPG" width="202"/>
+  <img src="blobs/stripe3.png" height="200"/>
+  <img src="blobs/serge2.png" height="200"/>
+  <img src="blobs/stripe2.JPG" height="200"/>
 </div>
 
 ---

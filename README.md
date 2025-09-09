@@ -19,8 +19,8 @@ L’obiettivo principale di questo progetto è stato sviluppare e validare una r
 La piattaforma consiste in una **sala conferenze tridimensionale** dove è possibile interagire con altri giocatori, manipolare oggetti e partecipare alle dinamiche del gioco.  
 
 Il progetto si basa su precedenti lavori:  
-- *The Metaverse Classroom* di Viviana Pentangelo (vipenti) - Università di Salerno  
-- La digitalizzazione del gioco realizzata da Nicola Modugno  
+- *The Metaverse Classroom* di Viviana Pentangelo (vipenti) - Università di Salerno.  
+- La digitalizzazione del gioco realizzata da Nicola Modugno.  
 
 **SERGE 2.0** integra un modello di intelligenza artificiale che genera automaticamente scenari di progetto, offrendo esperienze di gioco dinamiche, personalizzate e maggiormente immersive.
 
@@ -108,7 +108,7 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
    3. Inserire il modello:
       <br>3.1 All’interno della cartella Server_python in SERGE, creare una cartella Model.
       <br>3.2 Inserire PJDScenarios come sottocartella di Model (Model/PJDScenarios/file elencati sotto) contenente tutti i file richiesti:
-              config.json, generation_config.json, merges.txt, model.safetensors, special_tokens_map.json, tokenizer.json, tokenizer_config.json, vocab.json
+              config.json, generation_config.json, merges.txt, model.safetensors, special_tokens_map.json, tokenizer.json, tokenizer_config.json, vocab.json.
 
    4. Aprire il progetto in Unity Hub
       <br>4.1 Vai su Projects → Open e seleziona la cartella SERGE.

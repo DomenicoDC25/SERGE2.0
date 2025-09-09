@@ -1,4 +1,4 @@
-<center># SERGE 2.0 & IA: Integrazione di un modello IA in SERGE 2.0</center>
+<h1 align="center">SERGE 2.0 & IA: Integrazione di un modello IA in SERGE 2.0</h1>
 
 <h3 align="left"></h3>
 <p align="left">
@@ -6,7 +6,7 @@ Un progetto open-source sviluppato con Unity3D e Photon Unity Networking, basato
 Questa versione, **SERGE 2.0**, integra un modello di intelligenza artificiale capace di generare automaticamente scenari di progetto, permettendo agli utenti di vivere esperienze dinamiche e personalizzate, arricchendo l’apprendimento collaborativo e l’interazione all’interno del gioco.
 </p>
 
-<p align="center">
+<p align="left">
 Questo progetto si basa sul Serious Game SERGE descritto nell’articolo: [ACM Link](https://dl.acm.org/doi/abs/10.1145/3639474.3640085)
 </p>
 

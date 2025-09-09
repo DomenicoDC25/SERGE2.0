@@ -70,27 +70,27 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
 
 #### MacOS
 1. **Scaricare l’applicazione**  
-   Scarica la cartella **MacOS Build.app** dalla sezione Releases ed estraila in una posizione a tua scelta.  
+   Scarica la cartella **MacOS.app** dalla sezione Releases ed estraila in una posizione a tua scelta.  
 
 2. **Avvio del gioco**  
    Apri il terminale ed esegui:  
    ```bash
-   chmod +x ~/tuo_percorso/MacOS Build.app/Contents/MacOS/SERGE
-   ~/tuo_percorso/MacOS Build.app/Contents/MacOS/SERGE
+   chmod +x ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/SERGE
+   ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/SERGE
 
 3. **Installazione Python e librerie (solo host)**  
    Apri il terminale ed esegui:  
    ```bash
-   chmod +x ~/tuo_percorso/MacOS Build.app/Contents/MacOS/installazione_python_server.sh
-   sed -i '' 's/\r$//' ~/tuo_percorso/MacOS Build.app/Contents/MacOS/installazione_python_server.sh
-   ~/tuo_percorso/MacOS Build.app/Contents/MacOS/installazione_python_server.sh
+   chmod +x ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/installazione_python_server.sh
+   sed -i '' 's/\r$//' ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/installazione_python_server.sh
+   ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/installazione_python_server.sh
 
 4. **Avvio server (solo host)**
    <br>Apri il terminale ed esegui:
    ```bash
-   chmod +x ~/tuo_percorso/MacOS Build.app/Contents/MacOS/avvia_server.sh
-   sed -i '' 's/\r$//' ~/tuo_percorso/MacOS Build.app/Contents/MacOS/avvia_server.sh
-   ~/tuo_percorso/MacOS Build.app/Contents/MacOS/avvia_server.sh
+   chmod +x ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/avvia_server.sh
+   sed -i '' 's/\r$//' ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/avvia_server.sh
+   ~/tuo_percorso/MacOS.app/APP_MAC.app/Contents/MacOS/avvia_server.sh
 
 #### Progetto Unity
 **Requisiti**

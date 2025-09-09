@@ -3,11 +3,11 @@
 <h3 align="left"></h3>
 <p align="left">
 Un progetto open-source sviluppato con Unity3D e Photon Unity Networking, basato sul serious game SERGE, con l’obiettivo di creare un ambiente virtuale tridimensionale per scopi accademici ed educativi.  
-Questa versione, **SERGE 2.0**, integra un modello di intelligenza artificiale capace di generare automaticamente scenari di progetto, permettendo agli utenti di vivere esperienze dinamiche e personalizzate, arricchendo l’apprendimento collaborativo e l’interazione all’interno del gioco.
+Questa versione, SERGE 2.0 , integra un modello di intelligenza artificiale capace di generare automaticamente scenari di progetto, permettendo agli utenti di vivere esperienze dinamiche e personalizzate, arricchendo l’apprendimento collaborativo e l’interazione all’interno del gioco.
 </p>
 
 <p align="left">
-Questo progetto si basa sul Serious Game SERGE descritto nell’articolo: [ACM Link](https://dl.acm.org/doi/abs/10.1145/3639474.3640085)
+Questo progetto si basa sul Serious Game SERGE descritto nell’articolo: [ACM Link](https://dl.acm.org/doi/abs/10.1145/3639474.3640085).
 </p>
 
 <!-- <p align="center"><img src="blobs/presentation_pic.jpg?raw=true" width="800" heigth="600"></p> -->
@@ -40,9 +40,9 @@ Il progetto si basa su precedenti lavori:
 Questo repository contiene il codice completo del progetto Unity per **SERGE 2.0**, comprensivo delle funzionalità di gioco e dell’integrazione con il modello di intelligenza artificiale per la generazione di scenari di progetto.
 
 **Releases incluse:**
-- **Windows Build**: Applicazione pronta all’uso per Windows  
-- **MacOS Build.app**: Applicazione pronta all’uso per MacOS  
-- **PJDScenarios**: Modello IA per generazione scenari di progetto  
+- **Windows Build**: Applicazione pronta all’uso per Windows.  
+- **MacOS Build.app**: Applicazione pronta all’uso per MacOS.  
+- **PJDScenarios**: Modello IA per generazione scenari di progetto.  
 
 Il repository permette sia di esplorare e modificare il progetto Unity completo, sia di utilizzare direttamente le versioni compilate dell’applicazione e il modello IA per sperimentare scenari personalizzati.
 
@@ -50,7 +50,11 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
 
 ## Come Installare
 
+---
+
 ### Solo Applicazione
+
+---
 
 #### Windows
 1. **Scaricare l’applicazione**  

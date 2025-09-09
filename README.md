@@ -1,7 +1,7 @@
-# SERGE 2.0 & IA: Integrazione di un modello IA in SERGE 2.0
+<center># SERGE 2.0 & IA: Integrazione di un modello IA in SERGE 2.0</center>
 
-<h3 align="center"></h3>
-<p align="center">
+<h3 align="left"></h3>
+<p align="left">
 Un progetto open-source sviluppato con Unity3D e Photon Unity Networking, basato sul serious game SERGE, con l’obiettivo di creare un ambiente virtuale tridimensionale per scopi accademici ed educativi.  
 Questa versione, **SERGE 2.0**, integra un modello di intelligenza artificiale capace di generare automaticamente scenari di progetto, permettendo agli utenti di vivere esperienze dinamiche e personalizzate, arricchendo l’apprendimento collaborativo e l’interazione all’interno del gioco.
 </p>
@@ -105,7 +105,7 @@ Il repository permette sia di esplorare e modificare il progetto Unity completo,
    3. Inserire il modello:
       <br>3.1 All’interno della cartella Server_python in SERGE, creare una cartella Model.
       <br>3.2 Inserire PJDScenarios come sottocartella di Model contenente tutti i file richiesti:
-          config.json, generation_config.json, merges.txt, model.safetensors, special_tokens_map.json, tokenizer.json, tokenizer_config.json, vocab.json
+              config.json, generation_config.json, merges.txt, model.safetensors, special_tokens_map.json, tokenizer.json, tokenizer_config.json, vocab.json
 
    4. Aprire il progetto in Unity Hub
       <br>4.1 Vai su Projects → Open e seleziona la cartella SERGE.

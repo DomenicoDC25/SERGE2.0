@@ -31,6 +31,7 @@ Il progetto si basa su precedenti lavori:
   <br>
   <img src="blobs/serge1.png" width="202"/>
   <img src="blobs/serge2.png" width="202"/>
+  <img src="blobs/serge3.png" width="202"/>
 </div>
 
 ---
